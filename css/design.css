@@ -20,10 +20,16 @@ body, h1, h2, p, ul, li, a {
   color: inherit;
 }
 
+/* Untuk Chrome, Edge, dan Safari */
+body::-webkit-scrollbar {
+  display: none; 
+}
 /* Body Styling */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
 }
 #navbar {
   position: fixed;
