@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let autoSlide;
 
     function nextSlide() {
-        carousel.style.transition = "transform 0.5s ease-in-out";
+        carousel.style.transition = "transform 1s ease-in-out";
         carousel.style.transform = `translateX(-${imageWidth}px)`;
 
         setTimeout(() => {

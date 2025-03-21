@@ -127,7 +127,7 @@ header::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("../asset/background/background2.png");
+  background: url("../asset/background/background2.webp");
   background-size: cover;
   background-position: center;
   filter: blur(2px) brightness(60%); 
@@ -237,9 +237,14 @@ header p {
 }
 .carousel {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 1s ease-in-out;
     width: calc(200px * 6); 
     width: 100%;
+    overflow: hidden;
+}
+.carousel-item {
+flex: 0 0 auto;
+width: 100%; /* Sesuaikan dengan lebar item */
 }
 .carousel img {
     width: 200px;

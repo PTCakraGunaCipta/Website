@@ -1,0 +1,223 @@
+<?php
+include 'config.php';
+
+$query = "SELECT foto, judul, keterangan FROM tb_cakra_gn ORDER BY created_at DESC LIMIT 3";
+$result = $conn->query($query);
+$queryProducts = "SELECT foto_produk FROM tb_image_product ORDER BY created_at DESC";
+$resultProducts = $conn->query($queryProducts);
+$products = [];
+if ($resultProducts) {
+    while ($row = $resultProducts->fetch_assoc()) {
+        $products[] = $row;
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PT Cakra Guna Cipta</title>
+    <link rel="icon" href="/asset/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/design.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-wrapper">
+            <div class="logo">
+                <a href="./index.php" onclick="window.location.reload()" return false>
+                    <img src="./asset/logo/logo.webp" alt="Company Logo" class="logo-img"/>
+                </a>
+            </div>
+            <div class="nav-container">
+                <a href="#welcome" class="nav-link">Tentang Kami</a>
+                <a href="#products" class="nav-link">Produk</a>
+                <a href="#process" class="nav-link">Proses Produksi</a>
+                <a href="#news" class="nav-link">Berita & Kegiatan</a>
+                <a href="#contact" class="nav-link">Kontak</a>
+                <a href="./admin.php" onclick="window.location.reload()" return false class="nav-link">Admin</a>
+            </div>
+            <div class="menu-bar" id="menu-bar">
+                ☰
+            </div>
+        </div>
+    </nav>
+
+    <div class="nav-container2">
+        <a href="#welcome" class="nav-link">Tentang Kami</a>
+        <a href="#products" class="nav-link">Produk</a>
+        <a href="#process" class="nav-link">Proses Produksi</a>
+        <a href="#news" class="nav-link">Berita</a>
+        <a href="#contact" class="nav-link">Kontak</a>
+        <a href="./admin.php" onclick="window.location.reload()" return false class="nav-link">Admin</a>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <h1>PT. CAKRA GUNA CIPTA</h1>
+            <h2>Produce Innovative and High-quality Products</h2>
+            <div class="visi-misi-container">
+                <p><strong>VISI</strong></p>
+                <p class="isi">Menjadi perusahaan besar yang terkemuka dan memiliki peran dominan dalam industri rokok Indonesia.</p>
+            </div>
+            <div class="visi-misi-container">
+                <p><strong>MISI</strong></p>
+                <p class="isi">
+                    1. Menyediakan produk-produk inovatif bermutu tinggi dengan harga yang wajar bagi perokok dewasa yang memenuhi, bahkan melebihi harapan konsumen sekaligus memberikan manfaat bagi semua stakeholder.<br>
+                    2. Memberikan kompensasi dan lingkungan kerja yang baik kepada karyawan dan membina hubungan baik dengan mitra usaha.<br>
+                    3. Menjalin hubungan baik dengan masyarakat sekitar dengan memberikan kesempatan kerja bagi mereka yang memenuhi persyaratan perekrutan.<br>
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <section id="welcome">
+        <h2>SELAMAT DATANG DI PERUSAHAAN KAMI</h2>
+        <hr class="underline">
+        <p>PT. Cakra Guna Cipta adalah perusahaan rokok yang berdiri pada 8 Agustus 1984 atas prakarsa tiga pendiri visioner: Bapak Edi Indra Winoto, Bapak Achyat, dan Bapak Hadi Winata. Pada awalnya, perusahaan memulai operasionalnya di Jalan Ahmad Yani No. 138, Kota Malang, dengan luas area 1.900,2 m². <br>
+            Seiring dengan pertumbuhan bisnis dan kebutuhan akan fasilitas yang lebih memadai, pada April 1992, perusahaan memindahkan operasionalnya ke lokasi baru di Jalan Raya Kendalpayak No. 332, Kabupaten Malang. Perkembangan ini menjadi tonggak penting dalam perjalanan perusahaan untuk meningkatkan kapasitas dan efisiensi. <br>
+            Pada tahun 1999, PT. Cakra Guna Cipta melanjutkan ekspansi besar dengan membangun pabrik baru di Jalan Raya Kendalpayak No. 425. Lokasi ini kemudian menjadi pusat kegiatan utama perusahaan. Untuk memenuhi kebutuhan penyimpanan yang semakin meningkat, pada tahun 2022, perusahaan mendirikan gudang terpusat untuk tembakau dan cengkeh di lokasi yang sama. <br>
+            Tidak berhenti di situ, pada tahun 2023, perusahaan menunjukkan komitmennya dalam inovasi dan peningkatan produktivitas dengan membangun fasilitas rajangan modern berkapasitas hingga 3 ton per jam. Langkah ini menegaskan posisi PT. Cakra Guna Cipta sebagai salah satu pemain utama di industri rokok, yang terus berkembang dengan visi dan dedikasi yang kuat. <br>
+            Sejarah panjang ini menjadi cerminan perjalanan perusahaan dalam menghadapi tantangan, beradaptasi dengan perubahan, dan terus berinovasi untuk masa depan yang lebih baik.</p>
+    </section>
+
+    <section id="products">
+        <h2>PRODUK</h2>
+        <div class="carousel-container">
+            <button class="prev-btn">&#10094;</button>
+            <div class="carausel-wrapper">
+                <div class="carousel">
+                    <?php if (!empty($products)): ?>
+                        <?php foreach ($products as $product): ?>
+                            <img src="./asset/product/<?php echo htmlspecialchars($product['foto_produk']); ?>" alt="Product">
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Tidak ada produk yang tersedia.</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <button class="next-btn">&#10095;</button>
+        </div>
+    </section>
+
+    <section id="process">
+        <h2>PROSES PRODUKSI</h2>
+        <hr class="underline3">
+        <p>Proses produksi kami mencakup dua kategori utama: SKM dan SKR.</p>
+    
+        <!-- Kategori SKM -->
+        <div class="category">
+            <h3>Sigaret Kretek Mesin (SKM)</h3>
+            <div class="process-container">
+                <div class="process-step">
+                    <img src="./asset/produksi/skm1.webp" alt="SKM Proses 1">
+                </div>
+                <div class="process-step">
+                    <img src="./asset/produksi/skm2.webp" alt="SKM Proses 2">
+                </div>
+                <div class="process-step">
+                    <img src="./asset/produksi/skm3.webp" alt="SKM Proses 3">
+                </div>
+                <div class="process-step">
+                    <img src="./asset/produksi/skm4.webp" alt="SKM Proses 4">
+                </div>
+            </div>
+        </div>
+    
+        <!-- Kategori SKT -->
+        <div class="category">
+            <h3>Sigaret Kretek Tangan (SKT)</h3>
+            <div class="process-container">
+                <div class="process-step">
+                    <img src="./asset/produksi/skt1.webp" alt="SKT Proses 1">
+                </div>
+                <div class="process-step">
+                    <img src="./asset/produksi/skt2.webp" alt="SKT Proses 2">
+                </div>
+                <div class="process-step">
+                    <img src="./asset/produksi/skt3.webp" alt="SKT Proses 3">
+                </div>
+                <div class="process-step">
+                    <img src="./asset/produksi/skt4.webp" alt="SKT Proses 4">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="news">
+        <hr class="underline1">
+        <h2 class="news-title">BERITA & KEGIATAN</h2>
+        <div class="news-container">
+            <div class="carousel2">
+                <!-- Berita Online -->
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <div class="news-slide">
+                        <div class="news-content">
+                            <div class="hero-image">
+                                <div class="image-placeholder">
+                                    <img src="./asset/data-foto/<?php echo htmlspecialchars($row['foto']); ?>" alt="<?php echo htmlspecialchars($row['judul']); ?>">
+                                </div>
+                            </div>
+                            <div class="news-text">
+                                <h5><?php echo htmlspecialchars($row['judul']); ?></h5>
+                                <p><?php echo nl2br(htmlspecialchars(substr($row['keterangan'], 0, 250))) . (strlen($row['keterangan']) > 250 ? '...' : ''); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        </div>
+
+        <!-- Dot Navigation -->
+        <div class="carousel-nav">
+            <span class="dot active" onclick="moveToSlide(0)"></span>
+            <span class="dot" onclick="moveToSlide(1)"></span>
+            <span class="dot" onclick="moveToSlide(2)"></span>
+            <button class="more-btn" onclick="window.location.href='./news.php'">Selengkapnya →</button>
+
+        </div>
+        <hr class="underline1">
+    </section>
+
+    <section id="contact" class="contact">
+        <!-- Bagian Tengah Atas -->
+        <div class="contact-header">
+            <p class="company-name">PT CAKRA GUNA CIPTA</p>
+            <h2>Kontak Kami</h2>
+        </div>
+    
+        <div class="contact-container">
+            <!-- Bagian Kiri: Informasi Kontak -->
+            <div class="contact-info">
+                <div class="contact-icons">
+                    <a href="https://maps.app.goo.gl/kzV1LrDrmf8DzS1Q6" target="_blank">
+                        <i class="fa-solid fa-location-dot"></i> Lokasi: Jl. Raya Kendalpayak No.332 07, Kendalpayak, Kec. Pakisaji, Kabupaten Malang, Jawa Timur 65162
+                    </a>
+                    <a href="mailto:pt.cakragunacipta@gmail.com">
+                        <i class="fa-regular fa-envelope"></i> Email: PT.CAKRAGUNACIPTA@gmail.com
+                    </a>
+                    <a href="tel:+0341801750">
+                        <i class="fa-solid fa-phone"></i> Telepon: (0341) 801750
+                    </a>
+                </div>
+            </div>
+    
+            <!-- Garis Pemisah -->
+            <div class="divider"></div>
+            <!-- Bagian Kanan: Peta -->
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5236.577967612349!2d112.62475861167812!3d-8.042017391951642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd627821537837b%3A0xdf988a3fc8bed275!2sPT.%20Cakra%20Guna%20Cipta!5e1!3m2!1sid!2sid!4v1740186566965!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 PT Cakra Guna Cipta. Semua Hak Dilindungi.</p>
+    </footer>
+
+    <script src="./js/backend.js"></script>
+</body>
+</html>
